@@ -3,6 +3,8 @@ from Crawlers import Crawler
 
 
 class DataHandler(abc.ABC):
+    __crawler: Crawler
+
     @abc.abstractmethod
-    def pandas_read_html(self, crawler: Crawler):
+    def main(self):
         raise NotImplementedError

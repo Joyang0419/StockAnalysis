@@ -3,7 +3,7 @@ from DataHandler.HiStockDataHandler import HiStockDataHandler
 
 
 hi_stock_crawler = Crawler(
-    url='https://histock.tw/stock/rank.aspx',
+    url='https://histock.tw/stock/rank.aspx?p=all',
     method='get',
     headers_string="""authority: histock.tw
 method: GET
@@ -25,5 +25,5 @@ upgrade-insecure-requests: 1
 user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36"""
 )
 
-hi_stock_data_handler = HiStockDataHandler()
-print(hi_stock_data_handler.pandas_read_html(crawler=hi_stock_crawler))
+hi_stock_data_handler = HiStockDataHandler(crawler=hi_stock_crawler)
+print(hi_stock_data_handler.main())
