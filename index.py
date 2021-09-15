@@ -1,7 +1,6 @@
 import os
-# from flask_migrate import Migrate
 from dotenv import load_dotenv
-from app import create_app, db
+from app import create_app
 # 註冊models
 # from app.models import (
 #     users,
@@ -22,5 +21,3 @@ if os.path.exists(dotenv_path):
 
 # 建立Flask的Current App
 app = create_app(os.getenv('FLASK_CONFIG') or 'default')
-# 資料庫遷移腳本
-# migrate = Migrate(app, db)
