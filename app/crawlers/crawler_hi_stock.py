@@ -1,5 +1,6 @@
-from Crawlers import Crawler
-from DataHandler.HiStockDataHandler import HiStockDataHandler
+from app.crawlers import Crawler
+from data_handler.hi_stock_data_handler import HiStockDataHandler
+from app.models.daily_price_info import DailyPriceInfo
 
 
 hi_stock_crawler = Crawler(
@@ -25,5 +26,7 @@ upgrade-insecure-requests: 1
 user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36"""
 )
 
-hi_stock_data_handler = HiStockDataHandler(crawler=hi_stock_crawler)
-print(hi_stock_data_handler.main())
+hi_stock_data_handler = HiStockDataHandler()
+hi_stock_data_handler.handle_data(hi_stock_crawler)
+print(hi_stock_data_handler.get_handled_data())
+# hi_stock_data_handler.save_to_database(models=DailyPriceInfo)
