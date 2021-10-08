@@ -1,3 +1,5 @@
+import datetime
+
 from app import db
 from . import ModelAbstract
 
@@ -10,5 +12,5 @@ class DailyPriceInfo(ModelAbstract):
     opening_price = db.Column(db.Float, nullable=False)
     highest_price = db.Column(db.Float, nullable=False)
     lowest_price = db.Column(db.Float, nullable=False)
-    date = db.Column(db.Date, nullable=False)
+    date = db.Column(db.Date, nullable=False, default=datetime.date)
 

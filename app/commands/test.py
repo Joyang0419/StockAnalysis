@@ -1,7 +1,9 @@
 from . import test
-from app.crawlers.data_handler.hi_stock_data_handler import HiStockDataHandler
-from app.layer.application.crawlers.hi_stock import ApplicationHiStock
 from app.crawlers import Crawler
+from app.crawlers.data_handler.data_handler_for_hi_stock import DataHandlerForHiStock
+from app.layer.application.application_crawler import ApplicationCrawler
+from app.repositories.repository_stock_basic_info import RepositoryStockBasicInfo
+from app import db
 from app.models.stock_basic_info import StockBasicInfo
 
 
@@ -29,9 +31,16 @@ sec-fetch-user: ?1
 upgrade-insecure-requests: 1
 user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36"""
     )
-    application_hi_stock = ApplicationHiStock()
-    application_hi_stock.execute(crawler=hi_stock_crawler, data_handler=HiStockDataHandler(), model=StockBasicInfo())
-    return "456"
+    print('=======================')
+    print(hi_stock_crawler.response)
+    print('=======================')
+
+    application_crawler = ApplicationCrawler()
+    data_handler = DataHandlerForHiStock(crawler=hi_stock_crawler)
+    # data_handler.handle_data(data_type='stock_basic_info')
+    # print(data_handler.provide_handled_data())
+    repository = RepositoryStockBasicInfo(session=db.session, model=StockBasicInfo)
+    application_crawler.crawl_stock_basic_info(data_handler=data_handler, repository=repository)
 
 
 # hi_stock_data_handler = HiStockDataHandler()
